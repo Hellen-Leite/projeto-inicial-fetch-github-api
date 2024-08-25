@@ -4,7 +4,6 @@
   <li><a href="#como-abrir"> Como abrir </a></li>
   <li><a href="#objetivo"> Objeitvo</a></li>
   <li><a href="#layout-do-projeto"> Layout do Projeto</a></li>
-  <li><a href="#conhecimentos-adquiridos-com-a-pratica"> Conhecimentos adquiridos com a prática</a></li>
 </ul>
 
 ### Descrição do Projeto
