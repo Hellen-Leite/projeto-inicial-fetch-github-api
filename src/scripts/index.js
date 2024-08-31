@@ -9,7 +9,6 @@ document.getElementById('btn-search').addEventListener('click', () => {
     if (validateEmptyInput(userName))
         return
     getUserData(userName)
-    getUserEvents(userName)
 })
 
 document.getElementById('input-search').addEventListener('keyup', (e) => {
@@ -21,7 +20,6 @@ document.getElementById('input-search').addEventListener('keyup', (e) => {
         if (validateEmptyInput(userName))
             return
         getUserData(userName)
-        getUserEvents(userName)
     }
 })
 
@@ -41,28 +39,11 @@ async function getUserData(userName) {
 
     const repositoriesResponse = await getRepos(userName)
 
+    const eventsResponse = await getEvents(userName)
+
     user.setInfo(userResponse)
     user.setRepositories(repositoriesResponse)
+    user.setEvents(eventsResponse)
 
     screen.renderUser(user)
-    getUserEvents(userName)
-
-}
-function getUserEvents(userName) {
-    getEvents(userName).then(eventesData => {
-        let eventsItens = ""
-        eventesData.forEach(item => {
-            if (item.type === "PushEvent") {
-                eventsItens += `<div class="events"><li>${item.repo.name}: <p class="commits"> -${item.payload.commits[0].message}</p></li> </div>`
-            }
-            else { eventsItens += `${item.repo.name}: <div class="events"><p class="strong">Sem mensagem de commit</p></div>` }
-        })
-
-        document.querySelector('.profile-data').innerHTML += `<div class="repositories section">
-        <h2>Últimos Eventos</h2>
-        <div class="events">
-        <ul>${eventsItens}</ul>
-        </div>
-        </div>`
-    })
 }
