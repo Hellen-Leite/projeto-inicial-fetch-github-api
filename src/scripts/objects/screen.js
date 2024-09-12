@@ -16,35 +16,44 @@ const screen = {
         let repositoriesItens = ''
         user.repositories.forEach(repo =>
             repositoriesItens += `<li><a href="${repo.html_url}" target="_blank">${repo.name}</a>
-            <div class="reposit">
-                <p>Forks:${repo.forks}</p> 
-                <p>Watchers:${repo.watchers}</p>
-                <p>Stars:${repo.stargazers_count}</p>
-                <p>Linguagem utilizada:${repo.language}</p>
-            </div></li>`);
+                                    <div class="reposit">
+                                        <p>Forks:${repo.forks ?? 'Este usuário não possui Forks'}</p> 
+                                        <p>Watchers:${repo.watchers ?? 'Sem watchers'}</p>
+                                        <p>Stars:${repo.stargazers_count ?? 'Sem Stars no momento'}</p>
+                                        <p>Linguagem utilizada:${repo.language ?? 'Ainda não há linguagens sendo utilizadas por esse usuário Git'}</p>
+                                    </div>
+                                  </li>`);
 
         if (user.repositories.length > 0) {
             this.userProfile.innerHTML += `<div class="repositories section">
-               <h2>Repositórios</h2>
-               <ul>${repositoriesItens}</ul>
-               </div>`
+                                                    <h2>Repositórios</h2>
+                                                    <ul>${repositoriesItens}</ul>
+                                           </div>`
         }
 
         let eventss = ''
         user.events.forEach(item => {
             if (item.type === "PushEvent") {
-                eventss += `<div class="events"><li>${item.repo.name}: <p class="commits"> -${item.payload.commits[0].message}</p></li> </div>`
+                eventss += `<div class="events">
+                                <li>${item.repo.name}: 
+                                    <p class="commits"> -${item.payload.commits[0].message}</p>
+                                </li> 
+                            </div>`
             }
-            else { eventss += `${item.repo.name}: <div class="events"><p class="strong">Sem mensagem de commit</p></div>` }
+            else {
+                eventss += `${item.repo.name}: 
+                            <div class="events">
+                                <p class="strong">Sem mensagem de commit</p>
+                            </div>` }
         })
 
 
         this.userProfile.innerHTML += `<div class="repositories section">
-                 <h2>Últimos Eventos</h2>
-                     <div class="events">
-                        <ul>${eventss}</ul>
-                     </div>
-             </div>`
+                                        <h2>Últimos Eventos</h2>
+                                        <div class="events">
+                                            <ul>${eventss}</ul>
+                                        </div>
+                                       </div>`
 
     },
 
