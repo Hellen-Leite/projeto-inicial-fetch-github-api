@@ -20,7 +20,7 @@ const screen = {
                                         <p>Forks:${repo.forks ?? 'Este usuário não possui Forks'}</p> 
                                         <p>Watchers:${repo.watchers ?? 'Sem watchers'}</p>
                                         <p>Stars:${repo.stargazers_count ?? 'Sem Stars no momento'}</p>
-                                        <p>Linguagem utilizada:${repo.language ?? 'Linguagem não convencional'}</p>
+                                        <p>Linguagem utilizada:${repo.language ?? ' Linguagem não convencional'}</p>
                                     </div>
                                   </li>`);
 
@@ -43,7 +43,7 @@ const screen = {
             else {
                 eventss += `${item.repo.name}: 
                             <div class="events">
-                                <p class="strong">Sem mensagem de commit</p>
+                                <p class="strong"> -- Criado um ${item.payload.ref_type}</p>
                             </div>` }
         })
 
